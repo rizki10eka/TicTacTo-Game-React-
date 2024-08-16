@@ -1,41 +1,43 @@
+export default function GameBoard({ onSelectSquare, board }) {
+  //   let gameBoard = initialGameBoard;
 
-const initialGameBoard = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null]
-]
+  //   for (const turn of turns) {
+  //     const { square, player } = turn;
+  //     const { row, col } = square;
 
-export default function GameBoard({ onSelectSquare, turns }) {
-    let gameBoard = initialGameBoard;
+  //     gameBoard[row][col] = player;
+  //   }
 
-    for(const turn of turns) {
-        const { square, player} = turn;
-        const { row, col} = square;
+  // const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
-        gameBoard[row][col] = player;
-    }
+  // function handleSelectSquare(rowIndex, colIndex) {
+  //     setGameBoard((prevGameBoard) => {
+  //         const updateBoard = [...prevGameBoard.map(innerArray => [...innerArray])]
+  //         updateBoard[rowIndex][colIndex] = activePlayerSymbol;
+  //         return updateBoard;
+  //     });
 
-    // const [gameBoard, setGameBoard] = useState(initialGameBoard);
+  //     onSelectSquare();
+  // }
 
-    // function handleSelectSquare(rowIndex, colIndex) {
-    //     setGameBoard((prevGameBoard) => {
-    //         const updateBoard = [...prevGameBoard.map(innerArray => [...innerArray])]
-    //         updateBoard[rowIndex][colIndex] = activePlayerSymbol;
-    //         return updateBoard;
-    //     });
-
-    //     onSelectSquare();
-    // }
-
-    return <ol id="game-board">
-        {gameBoard.map((row, rowIndex) => <li key={rowIndex}>
-            <ol>
-                {row.map((playerSymbol, colIndex) =>
-                    <li key={colIndex}>
-                        <button onClick={() => onSelectSquare(rowIndex, colIndex)}>{playerSymbol}</button>
-                    </li>
-                )}
-            </ol>
-        </li>)}
+  return (
+    <ol id="game-board">
+      {board.map((row, rowIndex) => (
+        <li key={rowIndex}>
+          <ol>
+            {row.map((playerSymbol, colIndex) => (
+              <li key={colIndex}>
+                <button
+                  onClick={() => onSelectSquare(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
+                >
+                  {playerSymbol}
+                </button>
+              </li>
+            ))}
+          </ol>
+        </li>
+      ))}
     </ol>
+  );
 }
